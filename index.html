@@ -39,7 +39,7 @@
         document.getElementById('message').textContent = data.donation_message || '';
         document.getElementById('eggs').textContent = `Eggs eaten: ${data.eggs}`;
         document.getElementById('donations').textContent = `Total raised: $${Number(data.donation_total).toFixed(2)}`;
-        document.getElementById('per-egg').textContent = `This egg: $${data.donation_this_egg}`;
+        document.getElementById('per-egg').textContent = `This egg: $${Number(data.donation_total).toFixed(2)}`;
         //document.getElementById('per-egg').textContent = `This egg: $${Number(data.donation_this_egg).toFixed(2)}`;
         
       } catch (err) {
