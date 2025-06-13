@@ -21,26 +21,21 @@
 </head>
 <body>
   <div id="container">
-    <div id="message"></div>
     <div id="eggs">Eggs eaten: 0</div>
     <div id="donations">Total raised: $0.00</div>
-    <div id="per-egg">This egg: $0.00</div>
+    <div id="message">Alert: test</div>
   </div>
 
   <script>
-
     const endpoint = 'https://script.google.com/macros/s/AKfycbwE9r6PBzkmZM4Nq6OESeQpvSWCPULn4TiD3rhM33bIIlv0BgxNqbf6cnlDUg47KyWX/exec';
 
     async function fetchData() {
       try {
         const res = await fetch(endpoint);
         const data = await res.json();
-
-        document.getElementById('message').textContent = data.donation_message;
         document.getElementById('eggs').textContent = `Eggs eaten: ${data.eggs}`;
         document.getElementById('donations').textContent = `Total raised: $${Number(data.donation_total).toFixed(2)}`;
-        document.getElementById('per-egg').textContent = `This egg: $${Number(data.donation_this_egg).toFixed(2)}`;
-        
+        document.getElementById('message').textContent = data.donation_message;
       } catch (err) {
         console.error('Error fetching overlay data:', err);
       }
@@ -51,4 +46,3 @@
   </script>
 </body>
 </html>
-
