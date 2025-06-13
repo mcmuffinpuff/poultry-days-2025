@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      color: white;
+      background: transparent;
+      font-size: 40px;
+      text-align: center;
+    }
+    #container {
+      position: fixed;
+      top: 10px;
+      width: 100%;
+      z-index: 1000;
+      text-shadow: 2px 2px 6px black;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="eggs">Eggs eaten: 0</div>
+    <div id="donations">Total raised: $0.00</div>
+    <div id="message">Alert: test</div>
+  </div>
+
+  <script>
+    const endpoint = 'https://script.google.com/macros/s/AKfycbwE9r6PBzkmZM4Nq6OESeQpvSWCPULn4TiD3rhM33bIIlv0BgxNqbf6cnlDUg47KyWX/exec';
+
+    async function fetchData() {
+      try {
+        const res = await fetch(endpoint);
+        const data = await res.json();
+        document.getElementById('eggs').textContent = `Eggs eaten: ${data.eggs}`;
+        document.getElementById('donations').textContent = `Total raised: $${Number(data.donation_total).toFixed(2)}`;
+        document.getElementById('message').textContent = data.donation_message;
+      } catch (err) {
+        console.error('Error fetching overlay data:', err);
+      }
+    }
+
+    setInterval(fetchData, 5000); // every 5 seconds
+    fetchData();
+  </script>
+</body>
+</html>
